@@ -11,8 +11,8 @@ export class NavbarComponent {
 
   constructor() {
     this.items = [
-      { label: 'Medicamentos', icon: 'pi pi-box', url: '/medicamentos', target: "_self" },
-      { label: 'Ventas', icon: 'pi pi-tags', url: '/ventas', target: "_self" }
+      { label: 'Tarea', icon: 'pi pi-box', url: '/task', target: "_self" },
+      { label: 'Relacionar Tareas', icon: 'pi pi-tags', url: '/task-relate', target: "_self" }
     ]
   }
 

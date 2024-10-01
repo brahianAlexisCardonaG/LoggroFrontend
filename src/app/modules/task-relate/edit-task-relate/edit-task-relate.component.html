@@ -1,0 +1,43 @@
+<div style="max-height: 500px; overflow-y: auto;">
+    <p-card role="region" [style]="{ width: '600px' }">
+        <span class="flex">Edita la Tarea</span>
+        <h2>{{ selectedTask?.name }}</h2>
+    </p-card>
+
+    <div *ngIf="selectedTask" class="task-card">
+        <p-card role="region" [style]="{ width: '600px', margin: '20px 0' }">
+
+            <p-multiSelect [(ngModel)]="selectedPersonsByTask[selectedTask.id]" [options]="listPerson"
+                optionLabel="name" placeholder="Seleccione personas" appendTo="body">
+            </p-multiSelect>
+
+            <div *ngFor="let person of selectedPersonsByTask[selectedTask.id]">
+                <p-card [style]="{ width: '90%', margin: '10px auto' }">
+                    <h3>{{ person.name }} {{ person.lastName }}</h3>
+
+                    <p-multiSelect [(ngModel)]="selectedHabilitiesByPerson[person.id]" [options]="listHability"
+                        optionLabel="name" placeholder="Seleccione habilidades" appendTo="body">
+                    </p-multiSelect>
+
+                    <div *ngIf="(selectedHabilitiesByPerson[person.id] ?? []).length > 0" class="mt-2">
+                        <p><strong>Habilidades seleccionadas para {{ person.name }}:</strong></p>
+                        <ul>
+                            <li *ngFor="let hability of selectedHabilitiesByPerson[person.id]">
+                                {{ hability.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </p-card>
+            </div>
+        </p-card>
+    </div>
+    <div class="mt-2 flex flex-row-reverse">
+        <button (click)="saveTaskRelations()" pButton class="p-button-sm p-button-success p-button-rounded m-1">
+            Guardar Relaciones
+        </button>
+        <button type="button" pButton (click)="dialogRef.close()" pButton
+            class="p-button-sm p-button-secondary p-button-rounded m-1">
+            Cancelar
+        </button>
+    </div>
+</div>

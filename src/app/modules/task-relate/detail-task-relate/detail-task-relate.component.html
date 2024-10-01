@@ -1,0 +1,30 @@
+<div *ngIf="listTask" style="max-height: 500px; overflow-y: auto;">
+
+    <p-card role="region" [style]="{ width: '600px' }">
+        <span class="flex"><strong>Tarea: </strong> {{ listTask.name }}</span>
+        <div><strong>Fecha:</strong> {{ listTask.date }}</div>
+        <div><strong>Estado:</strong> {{ listTask.state }}</div>
+    </p-card>
+
+    <div *ngFor="let person of listTask.persons" class="person-card">
+        <p-card role="region" [style]="{ width: '600px', margin: '20px 0' }">
+            <h2>Persona: {{ person.name }} {{ person.lastName }}</h2>
+            <div><strong>Edad:</strong> {{ person.age }}</div>
+
+            <div *ngIf="(person.habilities ?? []).length > 0" class="mt-2">
+                <p><strong>Habilidades:</strong></p>
+                <ul>
+                    <li *ngFor="let hability of person.habilities">
+                        {{ hability.name }}
+                    </li>
+                </ul>
+            </div>
+        </p-card>
+    </div>
+    <div class="mt-2 flex flex-row-reverse">
+        <button type="button" pButton (click)="dialogRef.close()" pButton
+            class="p-button-sm p-button-secondary p-button-rounded m-1">
+            Cerrar
+        </button>
+    </div>
+</div>

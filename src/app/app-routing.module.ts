@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MedicamentoComponent } from './modules/medicamento/medicamento.component';
-import { VentaComponent } from './modules/venta/venta.component';
+import { TaskComponent } from './modules/task/task.component';
+import { TaskRelateComponent } from './modules/task-relate/task-relate.component';
 
 const routes: Routes = [
   {
-    path: 'medicamentos',
-    component: MedicamentoComponent
+    path: 'task',
+    component: TaskComponent
   },
   {
-    path: 'ventas',
-    component: VentaComponent
-  }
+    path: 'task-relate',
+    component: TaskRelateComponent
+  },
+
 ];
 
 @NgModule({

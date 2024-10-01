@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { MedicamentoAddComponent } from 'src/app/modules/medicamento/medicamento-add/medicamento-add.component';
-import { MedicamentoDeleteComponent } from 'src/app/modules/medicamento/medicamento-delete/medicamento-delete.component';
-import { MedicamentoEditComponent } from 'src/app/modules/medicamento/medicamento-edit/medicamento-edit.component';
-import { VentaMedicamentoComponent } from 'src/app/modules/venta/venta-medicamento/venta-medicamento.component';
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddTaskRelateComponent } from 'src/app/modules/task-relate/add-task-relate/add-task-relate.component';
+import { DetailTaskRelateComponent } from 'src/app/modules/task-relate/detail-task-relate/detail-task-relate.component';
+import { EditTaskRelateComponent } from 'src/app/modules/task-relate/edit-task-relate/edit-task-relate.component';
+import { TaskAddComponent } from 'src/app/modules/task/task-create/task-add.component';
+import { TaskDeleteComponent } from 'src/app/modules/task/task-delete/task-delete.component';
+import { TaskEditComponent } from 'src/app/modules/task/task-edit/task-edit.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,16 +20,16 @@ export class DialogService {
     return Object.assign({}, this.defaultOptions, newInformation);
   }
 
-  guardarMedicamentoDialog() {
-    let dialogRef: MatDialogRef<MedicamentoAddComponent>;
-    dialogRef = this.matDialog.open(MedicamentoAddComponent, this.defaultOptions);
+  saveTaskDialog() {
+    let dialogRef: MatDialogRef<TaskAddComponent>;
+    dialogRef = this.matDialog.open(TaskAddComponent, this.defaultOptions);
     return dialogRef.afterClosed();
   }
 
-  eliminarMedicamentoDialog(data: any) {
-    let dialogRef: MatDialogRef<MedicamentoDeleteComponent>;
+  deleteTaskDialog(data: any) {
+    let dialogRef: MatDialogRef<TaskDeleteComponent>;
     dialogRef = this.matDialog.open(
-      MedicamentoDeleteComponent,
+      TaskDeleteComponent,
       this.assignOptions({
         data: { data }
       })
@@ -36,10 +37,10 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  editarMedicamentoDialog(data: any) {
-    let dialogRef: MatDialogRef<MedicamentoEditComponent>;
+  updateTaskComponent(data: any) {
+    let dialogRef: MatDialogRef<TaskEditComponent>;
     dialogRef = this.matDialog.open(
-      MedicamentoEditComponent,
+      TaskEditComponent,
       this.assignOptions({
         data: { data }
       })
@@ -47,10 +48,27 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  venderMedicamentoDialog(data: any) {
-    let dialogRef: MatDialogRef<VentaMedicamentoComponent>;
+  saveTaskRelateDialog() {
+    let dialogRef: MatDialogRef<AddTaskRelateComponent>;
+    dialogRef = this.matDialog.open(AddTaskRelateComponent, this.defaultOptions);
+    return dialogRef.afterClosed();
+  }
+
+  detailTaskRelateDialog(data: any) {
+    let dialogRef: MatDialogRef<DetailTaskRelateComponent>;
     dialogRef = this.matDialog.open(
-      VentaMedicamentoComponent,
+      DetailTaskRelateComponent,
+      this.assignOptions({
+        data: { data }
+      })
+    );
+    return dialogRef.afterClosed();
+  }
+
+  updateTaskRelateDialog(data: any) {
+    let dialogRef: MatDialogRef<EditTaskRelateComponent>;
+    dialogRef = this.matDialog.open(
+      EditTaskRelateComponent,
       this.assignOptions({
         data: { data }
       })
