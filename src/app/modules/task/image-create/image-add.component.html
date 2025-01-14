@@ -1,0 +1,52 @@
+<ng-container *ngIf="formAddImage">
+  <p-card role="region" [style]="{ width: '600px' }">
+    <form [formGroup]="formAddImage" novalidate autocomplete="off" class="p-card-body">
+      <div>
+        <h2 class="p-dialog-title">Nueva Imagen</h2>
+      </div>
+      <div class="p-dialog-content p-fluid p-mb-3">
+        <div class="p-field m-1">
+          <label for="name">Nombre Persona</label>
+          <input id="name" type="text" formControlName="name" class="p-inputtext">
+          <div class="p-invalid span-no-margin">
+            <ng-container *ngIf="formAddImage.controls['name'].invalid && formAddImage.controls['name'].touched">
+              <span *ngIf="formAddImage.controls['name'].errors?.['required']"
+                class="text-red-500 scalein animation-duration-500 text-sm relative flex z-0">
+                Este campo es requerido
+              </span>
+              <span *ngIf="formAddImage.controls['name'].errors?.['pattern']"
+                class="text-red-500 scalein animation-duration-500 text-sm relative flex z-0">
+                Solo se permiten letras, números, espacios y los dos puntos (:)
+              </span>
+              <span *ngIf="formAddImage.controls['name'].errors?.['maxlength']"
+                class="text-red-500 scalein animation-duration-500 text-sm relative flex z-0">
+                No se permiten mas de 20 carateres
+              </span>
+            </ng-container>
+          </div>
+        </div>
+        <div class="p-field m-2">
+          <div class="p-1 pb-2">
+            <label for="image">Imagen</label>
+          </div>
+
+          <p-fileUpload class="pt-4" #fu mode="basic" chooseLabel="Seleccionar Imagen" chooseIcon="pi pi-upload" name="demo[]"
+            url="https://www.primefaces.org/cdn/api/upload.php" accept="image/jpeg"
+            (onSelect)="onFileSelect($event)"></p-fileUpload>
+        </div>
+      </div>
+      <div class="mt-2 flex flex-row-reverse">
+        <button type="button" pButton (click)="dialogRef.close()"
+          class="p-button-sm p-button-secondary p-button-rounded m-1">
+          Cancelar
+        </button>
+        <button (click)="onFormSubmit()" [disabled]="!formAddImage.valid" pButton
+          class="p-button-sm p-button-success p-button-rounded m-1">
+          Crear
+        </button>
+      </div>
+    </form>
+  </p-card>
+</ng-container>
+
+<app-component-spinner *ngIf="isProgressSpinner"></app-component-spinner>

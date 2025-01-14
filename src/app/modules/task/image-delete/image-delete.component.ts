@@ -1,25 +1,26 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { TaskService } from 'src/app/core/services/task-service.service';
+import { ImageService } from 'src/app/core/services/image-service.service';
 
 @Component({
-  selector: 'app-task-delete',
-  templateUrl: './task-delete.component.html',
-  styleUrls: ['./task-delete.component.scss']
+  selector: 'app-image-delete',
+  templateUrl: './image-delete.component.html',
+  styleUrls: ['./image-delete.component.scss']
 })
-export class TaskDeleteComponent implements OnInit {
+export class ImageDeleteComponent implements OnInit {
 
-  dataTask: any;
+  dataImage: any;
   mensajeError: any;
+  isProgressSpinner:boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<TaskDeleteComponent>,
-    private taskService: TaskService,
+    public dialogRef: MatDialogRef<ImageDeleteComponent>,
+    private imageService: ImageService,
     private toasterService: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.dataTask = data.data
+    this.dataImage = data.data
   }
 
   ngOnInit(): void {
@@ -29,12 +30,15 @@ export class TaskDeleteComponent implements OnInit {
   onFormSubmit() {
     if (navigator.onLine) {
       this.mensajeError = null;
-      this.taskService.delete("api/task/delete", this.dataTask.id).subscribe({
-        next: (medicamento) => {
-          this.dialogRef.close(medicamento);
-          this.toasterService.success('Tarea eliminada exitosamente')
+      this.isProgressSpinner = true;
+      this.imageService.delete(this.dataImage._id).subscribe({
+        next: (image) => {
+          this.isProgressSpinner = false;
+          this.dialogRef.close(image);
+          this.toasterService.success('Imagen eliminada exitosamente')
         },
         error: (error) => {
+          this.isProgressSpinner = false;
           try {
             for (let field of error.error.errors) {
               this.toasterService.error(field.message, 'Error');

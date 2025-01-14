@@ -1,6 +1,7 @@
 <div>
-  <h3 mat-dialog-title>¿Estás seguro que deseas eliminar la tarea con nombre
-    {{dataTask.name}}?</h3>
+  <h3 mat-dialog-title>¿Estás seguro que deseas eliminar la imagen con nombre:
+    <br>
+    {{dataImage.imageUrl}}?</h3>
 </div>
 <div class="m-3 flex flex-row-reverse">
   <p-button styleClass="p-button-rounded p-button-secondary p-button-sm m-1" (click)="dialogRef.close()">Cancelar
@@ -8,3 +9,5 @@
   <p-button styleClass="p-button-rounded p-button-warning p-button-sm m-1" (click)="onFormSubmit()">Eliminar
   </p-button>
 </div>
+
+<app-component-spinner *ngIf="isProgressSpinner"></app-component-spinner>

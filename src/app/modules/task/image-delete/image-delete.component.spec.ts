@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskDeleteComponent } from './task-delete.component';
+import { ImageDeleteComponent } from './image-delete.component';
 
 describe('TaskDeleteComponent', () => {
-  let component: TaskDeleteComponent;
-  let fixture: ComponentFixture<TaskDeleteComponent>;
+  let component: ImageDeleteComponent;
+  let fixture: ComponentFixture<ImageDeleteComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TaskDeleteComponent]
+      declarations: [ImageDeleteComponent]
     });
-    fixture = TestBed.createComponent(TaskDeleteComponent);
+    fixture = TestBed.createComponent(ImageDeleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

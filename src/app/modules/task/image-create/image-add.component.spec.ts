@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskAddComponent } from './task-add.component';
+import { ImageAddComponent } from './image-add.component';
 
 describe('TaskAddComponent', () => {
-  let component: TaskAddComponent;
-  let fixture: ComponentFixture<TaskAddComponent>;
+  let component: ImageAddComponent;
+  let fixture: ComponentFixture<ImageAddComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TaskAddComponent]
+      declarations: [ImageAddComponent]
     });
-    fixture = TestBed.createComponent(TaskAddComponent);
+    fixture = TestBed.createComponent(ImageAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

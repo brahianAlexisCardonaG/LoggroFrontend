@@ -1,0 +1,96 @@
+<div class="m-2 mt-4">
+  <form [formGroup]="formImages" novalidate autocomplete="off" class="p-card-body">
+
+    <div class="pb-2">
+      <div class="inline-block">
+        <div class="inline-block px-2">
+          <label class="flex pl-2" for="estado">Fecha Inicial</label>
+          <p-calendar formControlName="dateInitial" dateFormat="dd-mm-yy" class="ml-1">
+          </p-calendar>
+        </div>
+        <div class="inline-block px-2">
+          <label class="flex pl-2" for="finalDate">Fecha Final</label>
+          <p-calendar formControlName="dateFinal" dateFormat="dd-mm-yy" class="ml-1">
+          </p-calendar>
+        </div>
+      </div>
+
+      <p-button class="" styleClass="p-button-success p-button-sm p-button-rounded p-button-text m-1" pTooltip="Buscar"
+        [disabled]="formImages.invalid" matTooltipPosition="above" (click)="formImages.invalid? null:listImage()">
+        <mat-icon>search</mat-icon>
+      </p-button>
+      <p-button class="" styleClass="p-button-danger p-button-sm p-button-rounded p-button-text m-1" pTooltip="Limpiar"
+        matTooltipPosition="above" (click)="cleanFilterImage()">
+        <mat-icon>cleaning_services</mat-icon>
+      </p-button>
+    </div>
+  </form>
+</div>
+
+<p-table [value]="images?.records" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Imagenes
+      <p-button label="Nuevo" class="ml-auto" styleClass="p-button-rounded p-button-sm" pTooltip="Nuevo"
+        matTooltipPosition="above" (click)="saveImageDialog()">
+        <mat-icon>add</mat-icon>
+      </p-button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center">Imagen</th>
+      <th class="text-center">Nombre Persona</th>
+      <th class="text-center">fecha</th>
+      <th class="text-center">hora</th>
+      <th class="text-center">Opciones</th>
+    </tr>
+  </ng-template>
+  <ng-template class="align-items-center" pTemplate="body" let-product>
+    <tr>
+      <td class="text-center">
+        <a href="{{product.imageUrl}}" target="_blank" class="text-primary">Ver Imagen</a>
+      </td>
+      <td class="text-center">{{product.personName}}</td>
+      <td class="text-center">{{product.date | fechaFormatAMD}}</td>
+      <td class="text-center">{{product.hour}}</td>
+      <td class="text-center flex">
+
+        <p-button styleClass="p-button-danger p-button-sm p-button-rounded p-button-text m-1" pTooltip="Eliminar"
+          matTooltipPosition="above" (click)="deleteImageDialog(product)">
+          <mat-icon>delete</mat-icon>
+        </p-button>
+
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex align-items-center justify-content-between">
+      Total: {{images ? images.records.length : 0 }} Imagenes.
+    </div>
+  </ng-template>
+</p-table>
+
+<p-table [value]="images?.groupedByHour" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Cantidad de imagenes por hora
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center">hora</th>
+      <th class="text-center">cantidad de imagenes</th>
+    </tr>
+  </ng-template>
+  <ng-template class="align-items-center" pTemplate="body" let-product>
+    <tr>
+      <td class="text-center">{{product.hour}}</td>
+      <td class="text-center">{{product.recordCount}}</td>
+      <td class="text-center flex">
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<app-component-spinner *ngIf="isProgressSpinner"></app-component-spinner>

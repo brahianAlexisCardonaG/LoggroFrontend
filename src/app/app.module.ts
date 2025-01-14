@@ -11,7 +11,6 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-
 import { MatInputModule } from '@angular/material/input';
 import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
@@ -19,35 +18,29 @@ import { FechaFormatAMDPipe } from './pipe/fecha-format-amd.pipe';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { FileUploadModule } from 'primeng/fileupload';
 import { NavbarComponent } from './base/navbar/navbar.component';
 import { MenubarModule } from 'primeng/menubar';
-import { TaskComponent } from './modules/task/task.component';
-import { TaskAddComponent } from './modules/task/task-create/task-add.component';
-import { TaskDeleteComponent } from './modules/task/task-delete/task-delete.component';
-import { TaskEditComponent } from './modules/task/task-edit/task-edit.component';
+import { ImageComponent } from './modules/task/image.component';
+import { ImageAddComponent } from './modules/task/image-create/image-add.component';
+import { ImageDeleteComponent } from './modules/task/image-delete/image-delete.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TaskRelateComponent } from './modules/task-relate/task-relate.component';
-import { AddTaskRelateComponent } from './modules/task-relate/add-task-relate/add-task-relate.component';
 import { DropdownModule } from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { DetailTaskRelateComponent } from './modules/task-relate/detail-task-relate/detail-task-relate.component';
-import { EditTaskRelateComponent } from './modules/task-relate/edit-task-relate/edit-task-relate.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ComponentSpinnerComponent } from './shared/component-spinner/component-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskComponent,
-    TaskAddComponent,
-    TaskDeleteComponent,
-    TaskEditComponent,
+    ImageComponent,
+    ImageAddComponent,
+    ImageDeleteComponent,
     FechaFormatAMDPipe,
     NavbarComponent,
-    TaskRelateComponent,
-    AddTaskRelateComponent,
-    DetailTaskRelateComponent,
-    EditTaskRelateComponent
-
+    ComponentSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,11 +64,16 @@ import { EditTaskRelateComponent } from './modules/task-relate/edit-task-relate/
     MatDatepickerModule,
     MenubarModule,
     DropdownModule,
-    MultiSelectModule
+    MultiSelectModule,
+    FileUploadModule,
+    MessagesModule,
+    ToastModule,
+    ProgressSpinnerModule
   ],
   providers: [
   provideAnimations(),
   provideToastr(),
+  MessageService
 ],
   bootstrap: [AppComponent]
 })
